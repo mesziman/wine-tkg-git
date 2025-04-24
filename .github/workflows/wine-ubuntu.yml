@@ -17,11 +17,11 @@ jobs:
           sudo dpkg --add-architecture i386 && sudo apt update
           sudo apt install aptitude
           wget https://master.dl.sourceforge.net/project/xanmod/releases/edge/6.14.3-xanmod1/6.14.3-x64v3-xanmod1/linux-libc-dev_6.14.3-x64v3-xanmod1-0~20250420.g68e7b45_amd64.deb?viasf=1 -O x.deb
-          sudo dpkg -i ./x.deb
           sudo aptitude remove -y '?narrow(?installed,?version(deb.sury.org))'
           cd wine-tkg-git 
           sed -i 's/_NOLIB32="false"/_NOLIB32="false"/' wine-tkg-profiles/advanced-customization.cfg
           echo '_ci_build="true"' >> customization.cfg
+          sudo dpkg -i ./x.deb && echp 'X INSTALLED'
           touch tarplz
           yes|./non-makepkg-build.sh
       - name: Archive the artifacts
