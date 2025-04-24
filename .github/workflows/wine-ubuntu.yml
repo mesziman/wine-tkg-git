@@ -20,6 +20,7 @@ jobs:
           cd wine-tkg-git 
           sed -i 's/_NOLIB32="false"/_NOLIB32="false"/' wine-tkg-profiles/advanced-customization.cfg
           echo '_ci_build="true"' >> customization.cfg
+          sudo wget https://github.com/torvalds/linux/raw/refs/tags/v6.14/include/uapi/linux/ntsync.h -O /usr/include/linux/ntsync.h
           touch tarplz
           yes|./non-makepkg-build.sh
       - name: Archive the artifacts

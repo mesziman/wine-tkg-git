@@ -205,7 +205,6 @@ _script_init() {
       }
     fi
   fi
-
   # this script makes external builds already and we don't want the specific pacman-related stuff to interfere, so enforce _EXTERNAL_INSTALL="false" when not building proton-tkg
   if [ "$_EXTERNAL_INSTALL" = "true" ]; then
     _EXTERNAL_INSTALL="false"
