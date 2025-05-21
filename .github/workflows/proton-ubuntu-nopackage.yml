@@ -9,20 +9,32 @@ jobs:
     container: ubuntu:22.10
 
     steps:
+      - name: Checkout repo
       - uses: actions/checkout@v4
+      
+      - name: Create User
+        run: |
+          useradd -m -G wheel -s /bin/bash user
+          echo "user ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+      
       - name: Compile
         run: |
-          sudo dpkg --add-architecture i386
-          sudo apt update
+          chown -R user:user $PWD
           export CARGO_HOME="$PWD"
-          rustup target add i686-unknown-linux-gnu
-          cd proton-tkg
-          sed -i 's/uninstaller="false"/uninstaller="true"/' proton-tkg.cfg
-          sed -i 's/autoinstall="false"/autoinstall="true"/' proton-tkg.cfg
-          sed -i 's/LOCAL_PRESET=""/LOCAL_PRESET="none"/' proton-tkg.cfg
-          echo '_ci_build="true"' >> proton-tkg.cfg
-          touch tarplz
-          yes|./proton-tkg.sh
+          sudo -u user bash -c "
+            dpkg --add-architecture i386
+            apt update
+          "
+          sudo -u user bash -c "
+            rustup target add i686-unknown-linux-gnu
+            cd proton-tkg
+            sed -i 's/uninstaller="false"/uninstaller="true"/' proton-tkg.cfg
+            sed -i 's/autoinstall="false"/autoinstall="true"/' proton-tkg.cfg
+            sed -i 's/LOCAL_PRESET=""/LOCAL_PRESET="none"/' proton-tkg.cfg
+            echo '_ci_build="true"' >> proton-tkg.cfg
+            touch tarplz
+            yes|./proton-tkg.sh
+          "
       - name: Archive the artifacts
         uses: actions/upload-artifact@v4
         with:
