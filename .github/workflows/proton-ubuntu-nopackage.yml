@@ -12,19 +12,13 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Create User
-        run: |
-          echo "user ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
-
+      
       - name: Compile
         run: |
-          chown -R user:user $PWD
           export CARGO_HOME="$PWD"
-          sudo -u user bash -c "
+          bash -c "
             dpkg --add-architecture i386
-            apt update
-          "
-          sudo -u user bash -c "
+            apt update          
             rustup target add i686-unknown-linux-gnu
             cd proton-tkg
             sed -i 's/uninstaller="false"/uninstaller="true"/' proton-tkg.cfg
