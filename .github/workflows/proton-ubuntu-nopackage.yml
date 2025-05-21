@@ -11,12 +11,12 @@ jobs:
     steps:
       - name: Checkout repo
       - uses: actions/checkout@v4
-      
+
       - name: Create User
         run: |
           useradd -m -G wheel -s /bin/bash user
           echo "user ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
-      
+
       - name: Compile
         run: |
           chown -R user:user $PWD
