@@ -15,8 +15,8 @@ jobs:
       - name: Compile
         run: |
           export CARGO_HOME="$PWD"
-          dpkg --add-architecture i386
-          apt update          
+          sudo dpkg --add-architecture i386
+          sudo apt update          
           rustup target add i686-unknown-linux-gnu
           cd proton-tkg
           sed -i 's/uninstaller="false"/uninstaller="true"/' proton-tkg.cfg
