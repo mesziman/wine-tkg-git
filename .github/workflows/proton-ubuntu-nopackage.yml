@@ -15,9 +15,9 @@ jobs:
       - name: Compile
         run: |
           export CARGO_HOME="$PWD"
-          sudo dpkg --add-architecture i386
+          #sudo dpkg --add-architecture i386
           sudo apt update          
-          rustup target add i686-unknown-linux-gnu
+          #rustup target add i686-unknown-linux-gnu
           cd proton-tkg
           sudo wget https://github.com/torvalds/linux/raw/refs/tags/v6.14/include/uapi/linux/ntsync.h -O /usr/include/linux/ntsync.h
           sed -i 's/uninstaller=\"false\"/uninstaller=\"true\"/' proton-tkg.cfg
