@@ -63,7 +63,7 @@ index f749eb1b14d..a1c010f2024 100644
      msg->pt = point_phys_to_win_dpi( msg->hwnd, msg->pt );
      SetThreadDpiAwarenessContext( get_window_dpi_awareness_context( msg->hwnd ));
 
-+    if ((extra_info & 0xffffff00) != 0xff515700 && enable_mouse_in_pointer)
++    if ((hook_extra_info & 0xffffff00) != 0xff515700 && enable_mouse_in_pointer)
 +    {
 +        WORD flags = POINTER_MESSAGE_FLAG_PRIMARY;
 +        DWORD message = 0;
