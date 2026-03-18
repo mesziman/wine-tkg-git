@@ -59,7 +59,7 @@ diff --git a/dlls/win32u/message.c b/dlls/win32u/message.c
 index f749eb1b14d..a1c010f2024 100644
 --- a/dlls/win32u/message.c
 +++ b/dlls/win32u/message.c
-@@ -2605,6 +2605,51 @@ static BOOL process_mouse_message( MSG *msg, UINT hw_id, ULONG_PTR extra_info, H
+@@ -2585,6 +2585,51 @@ static BOOL process_mouse_message( MSG *msg, UINT hw_id, ULONG_PTR extra_info, H
      msg->pt = point_phys_to_win_dpi( msg->hwnd, msg->pt );
      SetThreadDpiAwarenessContext( get_window_dpi_awareness_context( msg->hwnd ));
 
