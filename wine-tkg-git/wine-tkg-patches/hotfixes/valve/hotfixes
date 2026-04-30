@@ -14,34 +14,7 @@ fi
 
 # De-steamify - When not building proton, get rid of steam-specific patches
 if [ "$_EXTERNAL_INSTALL" != "proton" ]; then
-  if [[ "$_plain_version" = *_7.0 ]]; then
-    if [[ "$_LOCAL_PRESET" = valve-ex* ]]; then
-      cp "$_where"/wine-tkg-patches/hotfixes/valve/de-steamify-be.mypatch "$_where"/
-    else
-      cp "$_where"/wine-tkg-patches/hotfixes/valve/de-steamify.mypatch "$_where"/
-    fi
-  elif [[ "$_plain_version" = *_8.0 ]]; then
-    if [[ "$_LOCAL_PRESET" = valve-ex* ]]; then
-      cp "$_where"/wine-tkg-patches/hotfixes/valve/de-steamify-80-be.mypatch "$_where"/
-    else
-      cp "$_where"/wine-tkg-patches/hotfixes/valve/de-steamify-80.mypatch "$_where"/
-    fi
-  elif [[ "$_plain_version" = *_9.0 ]]; then
-    if [[ "$_LOCAL_PRESET" = valve-ex* ]]; then
-      cp "$_where"/wine-tkg-patches/hotfixes/valve/de-steamify-90-be.mypatch "$_where"/
-    else
-      cp "$_where"/wine-tkg-patches/hotfixes/valve/de-steamify-90.mypatch "$_where"/
-    fi
-
-  elif [[ "$_plain_version" = *_10.0 ]]; then
-    if [[ "$_LOCAL_PRESET" = valve-exp-bleeding ]]; then
-      cp "$_where"/wine-tkg-patches/hotfixes/valve/de-steamify-10.0-be.mypatch "$_where"/
-    elif [[ "$_LOCAL_PRESET" = valve-ex* ]]; then
-      cp "$_where"/wine-tkg-patches/hotfixes/valve/de-steamify-10.0-exp.mypatch "$_where"/
-    else
-      cp "$_where"/wine-tkg-patches/hotfixes/valve/de-steamify-10.0.mypatch "$_where"/
-    fi
-  fi
+  cp "$_where"/wine-tkg-patches/hotfixes/valve/de-steamify/"$_proton_target"/de-steamify-"$_LOCAL_PRESET".mypatch "$_where"/ 2>/dev/null || warning "No de-steamify patch for this version... Yet"
 fi
 
 # Proton 10 quirks
